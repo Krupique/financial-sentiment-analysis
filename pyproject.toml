@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "financial-sentiment-analysis"
+version = "0.1.0"
+description = "Real-time financial news sentiment analysis using LLM, deployed via API with a client module for instant insights."
+authors = ["Krupique <krupique@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+torch = { version = "^2.5.0", source = "pytorch" }
+torchvision = {version = "^0.21.0+cu118", source = "pytorch"}
+torchaudio = {version = "^2.6.0+cu118", source = "pytorch"}
+fastapi = "^0.115.8"
+uvicorn = "^0.34.0"
+pydantic = "^2.10.6"
+transformers = "^4.48.3"
+
+[[tool.poetry.source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
