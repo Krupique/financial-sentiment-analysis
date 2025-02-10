@@ -44,8 +44,8 @@ def index():
 
 
 # Set the path to analyze the sentiment which allows POST requests
-@app.post("/dsa_analisa_sentimento/")
-async def dsa_analisa_sentimento(item: Item):
+@app.post("/sentiment_analysis/")
+async def sentiment_analysis(item: Item):
 
     # Concatenate the title and the text of the input item
     input_text = item.title + " " + item.text
@@ -54,10 +54,10 @@ async def dsa_analisa_sentimento(item: Item):
     preds_probs = await sentiment_predict(input_text)
 
     # Mpa the index of probabilities for the sentiments
-    dsa_sentimento_mapping = {0: "Negative", 1: "Neutral", 2: "Positive"}
+    map_sentiment = {0: "Negative", 1: "Neutral", 2: "Positive"}
 
     # Get the predicted sentiment based on maximum likelihood
-    predicted_sentiment = dsa_sentimento_mapping[preds_probs.index(max(preds_probs))]
+    predicted_sentiment = map_sentiment[preds_probs.index(max(preds_probs))]
     
     # Creates the response body with predicted sentiment and probabilities
     response_body = {
@@ -70,3 +70,8 @@ async def dsa_analisa_sentimento(item: Item):
     }
     
     return response_body
+
+
+# Execute the FastAPI app using uvicorn
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8787)
